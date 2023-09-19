@@ -1,6 +1,7 @@
 {
   "name": "Cooking Academy",
   "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -8,14 +9,15 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
-    "antd": "^4.16.13",
-    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.0",
     "babel-loader": "8.1.0",
-    "babel-plugin-import": "^1.13.3",
     "babel-plugin-named-asset-import": "^0.3.7",
     "babel-preset-react-app": "^10.0.0",
     "bfj": "^7.0.2",
@@ -51,13 +53,11 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "5.0.2",
     "prompts": "2.4.0",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.3",
-    "react-dom": "^17.0.1",
-    "react-redux": "^7.2.2",
+    "react-dom": "^17.0.2",
     "react-refresh": "^0.8.3",
-    "redux": "^4.0.5",
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "^10.0.5",
@@ -65,6 +65,7 @@
     "style-loader": "1.3.0",
     "terser-webpack-plugin": "4.2.3",
     "ts-pnp": "1.2.0",
+    "typescript": "^4.1.2",
     "url-loader": "4.1.1",
     "web-vitals": "^1.0.1",
     "webpack": "4.44.2",
@@ -96,22 +97,19 @@
       "MENU_CHILDREN": true,
       "MENU_PARENTKEY": true,
       "MENU_ALLPATH": true,
-      "MENU_PARENTPATH": true,
-      "MENU_LAYOUT": true
+      "MENU_PARENTPATH": true
     }
   },
   "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
-      "ie > 9"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version",
-      "ie > 9"
+      "last 1 safari version"
     ]
   },
   "jest": {
@@ -126,14 +124,14 @@
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/src/setupTests.ts"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "D:\\items\\antd_admin\\node_modules\\jest-circus\\runner.js",
+    "testRunner": "D:\\items\\react-ant-admin-ts\\node_modules\\jest-circus\\runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
@@ -181,25 +179,35 @@
     ]
   },
   "devDependencies": {
-    "@loadable/component": "^5.14.1",
+    "@ant-design/icons": "^5.1.4",
+    "@loadable/component": "^5.15.0",
+    "@types/loadable__component": "^5.13.3",
+    "@types/qs": "^6.9.7",
+    "@types/react-beautiful-dnd": "^13.0.0",
+    "@types/react-color": "^3.0.4",
+    "@types/react-redux": "^7.1.25",
+    "@types/react-router-dom": "^5.1.7",
     "ant-theme-generator": "^1.0.6",
+    "antd": "^4.16.13",
     "array-move": "^3.0.1",
-    "dayjs": "^1.10.4",
-    "echarts": "^5.0.2",
+    "axios": "^0.21.1",
+    "babel-plugin-import": "^1.13.3",
+    "dayjs": "^1.10.5",
+    "echarts": "^5.1.2",
     "echarts-for-react": "^3.0.1",
     "env-cmd": "^10.1.0",
-    "http-proxy-middleware": "^2.0.0",
-    "less": "^4.1.1",
+    "http-proxy-middleware": "^2.0.1",
+    "less": "^3.1.1",
     "less-loader": "^5.0.0",
     "qs": "^6.10.1",
-    "react-beautiful-dnd": "^13.0.0",
+    "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.19.3",
-    "react-draggable-tags": "^1.0.2",
     "react-error-overlay": "6.0.9",
-    "react-router-cache-route": "^1.11.0",
+    "react-redux": "^7.2.4",
+    "react-router-cache-route": "^1.11.1",
     "react-router-dom": "^5.2.0",
     "react-sortable-hoc": "^2.0.0",
-    "sass": "^1.32.8",
+    "redux": "^4.1.0",
     "style-resources-loader": "^1.4.1",
     "webpack-router-generator": "^1.0.9"
   },
@@ -217,7 +225,6 @@
     "MENU_CHILDREN": "children",
     "MENU_PARENTKEY": "parentKey",
     "MENU_ALLPATH": "allPath",
-    "MENU_PARENTPATH": "parentPath",
-    "MENU_LAYOUT": "layout"
+    "MENU_PARENTPATH": "parentPath"
   }
 }
