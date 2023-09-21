@@ -15,7 +15,7 @@ export default function PostWallPage() {
     return (
         <div className="search-container">
             <Button type="primary" onClick={toTextEditor}>
-                ajouter une commentaire
+                ajouter
             </Button>
             <Row gutter={[16, 24]}>
                 <Col className="gutter-row" span={6}>
