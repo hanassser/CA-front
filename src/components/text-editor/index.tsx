@@ -5,14 +5,13 @@ import {Button, Form, message,} from "antd";
 import './index.less';
 import {addService} from "@/api";
 
-
-function TextEditor({formData}) {
+function TextEditor({formData, imageData}:any) {
     const [editorState, setEditorState] = useState(BraftEditor.createEditorState(null));
-
 
     const handleEditorChange = (newEditorState: any) => {
         setEditorState(newEditorState);
     };
+
     const preview = () => {
         if (window.previewWindow) {
             window.previewWindow.close();
@@ -24,19 +23,21 @@ function TextEditor({formData}) {
     };
 
 
-
+    const [form] = Form.useForm();
     const saveEditorContent = () => {
         const content = editorState.toHTML();
         const dataToSend = { ...formData, content };
-        console.log('dataToSend', dataToSend);
+        console.log('dataToSend', imageData);
         addService(dataToSend).then((res) => {
+            console.log(11)
             if (res.status === 0) {
                 form.resetFields();
+
                 message.success(res.msg);
             }
         });
     };
-    const [form] = Form.useForm();
+
 
 
 
@@ -129,7 +130,6 @@ function TextEditor({formData}) {
                 extendControls={extendControls}
             />
             <br/>
-
             <Button onClick={saveEditorContent} type='primary' className='btn'>Ajouter</Button>
         </div>
     );
