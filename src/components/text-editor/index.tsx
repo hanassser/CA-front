@@ -4,8 +4,9 @@ import BraftEditor from 'braft-editor'
 import {Button, Form, message,} from "antd";
 import './index.less';
 import {addService} from "@/api";
+import {addPost, getPost} from "@/api/post-wall";
 
-function TextEditor({formData, imageData}:any) {
+function TextEditor({formData, imageData, isCard}:any) {
     const [editorState, setEditorState] = useState(BraftEditor.createEditorState(null));
 
     const handleEditorChange = (newEditorState: any) => {
@@ -27,15 +28,23 @@ function TextEditor({formData, imageData}:any) {
     const saveEditorContent = () => {
         const content = editorState.toHTML();
         const dataToSend = { ...formData, content };
+        const dataPostWall = {content}
         console.log('dataToSend', imageData);
-        addService(dataToSend).then((res) => {
-            console.log(11)
-            if (res.status === 0) {
-                form.resetFields();
-
-                message.success(res.msg);
-            }
-        });
+        if(isCard === true){
+            addPost(dataPostWall).then((res) => {
+                console.log(11)
+                if (res.status === 0) {
+                    message.success(res.msg);
+                }
+            });
+        } else {
+            addService(dataToSend).then((res) => {
+                if (res.status === 0) {
+                    form.resetFields();
+                    message.success(res.msg);
+                }
+            });
+        };
     };
 
 

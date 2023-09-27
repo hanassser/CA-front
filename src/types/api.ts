@@ -6,6 +6,7 @@ export type WorkshopList = WorkshopItem[]
 export type EventList = EventItem[]
 export type CourseList = CourseItem[]
 export type ReservationList = ReservationItem[]
+export type PostWallList = PostWallItem[]
 
 export interface ResponseData {
   status: number
@@ -123,4 +124,23 @@ export interface ResponseData {
 export interface LoginApi extends ResponseData {
   data: UserInfo
   token: string
+}
+
+type PostWallItem = {
+  m_id: number
+  name: string
+  price: string
+  type: string
+  date: string
+  description: string
+  content: string
+  creator: string
+  add_time: string
+}
+export interface PostWallApi extends ResponseData {
+  data?: {
+    total: number
+    mapKey: MapKey
+    list: PostWallList
+  }
 }
