@@ -1,4 +1,4 @@
-import TextEditor from "@/components/text-editor";
+
 import "./index.less";
 import React, { useState } from 'react';
 import {Form, Select, Input, DatePicker, InputNumber,} from "antd";
@@ -110,8 +110,7 @@ export default function SearchPage() {
                 </Form.Item>
                 <br/>
                 <Form.Item label="Content" >
-                    <TextEditor formData={formData} imageData={imageData} />
-                </Form.Item>
+                     </Form.Item>
 
             </Form>
 

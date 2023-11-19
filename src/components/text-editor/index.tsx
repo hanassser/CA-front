@@ -1,155 +1,69 @@
-import 'braft-editor/dist/index.css'
-import React, {useState} from 'react'
-import BraftEditor, { EditorState } from 'braft-editor'
-import {Button, Form, message,} from "antd";
-import './index.less';
-import {addService} from "@/api/service";
-import {addPost, getPost} from "@/api/post-wall";
+import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
+import React, { useState, useEffect } from 'react'
+import { Editor, Toolbar } from '@wangeditor/editor-for-react'
+import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
+import { i18nChangeLanguage } from '@wangeditor/editor'
 
-function TextEditor({formData, imageData, isCard}:any) {
-    const [editorState, setEditorState] = useState(BraftEditor.createEditorState(null));
+i18nChangeLanguage('en')
 
-    const handleEditorChange = (newEditorState: any) => {
-        setEditorState(newEditorState);
-    };
+function MyEditor() {
+    // editor 实例
+    const [editor, setEditor] = useState<IDomEditor | null>(null)   // TS 语法
+    // const [editor, setEditor] = useState(null)                   // JS 语法
 
-    // const preview = () => {
-    //     if (window.previewWindow) {
-    //         window.previewWindow.close();
-    //     }
-    //
-    //     window.previewWindow = window.open();
-    //     window.previewWindow.document.write(buildPreviewHtml());
-    //     window.previewWindow.document.close();
-    // };
+    // 编辑器内容
+    const [html, setHtml] = useState('<p>hello</p>')
 
+    // 模拟 ajax 请求，异步设置 html
+    useEffect(() => {
+        setTimeout(() => {
+            setHtml('<p>hello world</p>')
+        }, 1500)
+    }, [])
 
-    const [form] = Form.useForm();
-    const saveEditorContent = () => {
-        const content = editorState.toHTML();
-        const dataToSend = { ...formData, content };
-        const dataPostWall = {content}
-        console.log('dataToSend', imageData);
-        if(isCard === true){
-            addPost(dataPostWall).then((res) => {
-                console.log(11)
-                if (res.status === 0) {
-                    message.success(res.msg);
-                }
-            });
-        } else {
-        addService(dataToSend).then((res) => {
-            if (res.status === 0) {
-                form.resetFields();
-                message.success(res.msg);
-            }
-        });
-        };
-    };
+    // 工具栏配置
+    const toolbarConfig: Partial<IToolbarConfig> = { }  // TS 语法
+    // const toolbarConfig = { }                        // JS 语法
 
+    // 编辑器配置
+    const editorConfig: Partial<IEditorConfig> = {    // TS 语法
+        // const editorConfig = {                         // JS 语法
+        placeholder: '请输入内容...',
+    }
 
-
-
-
-    const buildPreviewHtml = () => {
-        return `
-      <!Doctype html>
-      <html>
-        <head>
-          <title>Preview Content</title>
-          <style>
-            html,body{
-              height: 100%;
-              margin: 0;
-              padding: 0;
-              overflow: auto;
-              background-color: #f1f2f3;
-            }
-            .container{
-              box-sizing: border-box;
-              width: 1000px;
-              max-width: 100%;
-              min-height: 100%;
-              margin: 0 auto;
-              padding: 30px 20px;
-              overflow: hidden;
-              background-color: #fff;
-              border-right: solid 1px #eee;
-              border-left: solid 1px #eee;
-            }
-            .container img,
-            .container audio,
-            .container video{
-              max-width: 100%;
-              height: auto;
-            }
-            .container p{
-              white-space: pre-wrap;
-              min-height: 1em;
-            }
-            .container pre{
-              padding: 15px;
-              background-color: #f1f1f1;
-              border-radius: 5px;
-            }
-            .container blockquote{
-              margin: 0;
-              padding: 15px;
-              background-color: #f1f1f1;
-              border-left: 3px solid #d1d1d1;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">${editorState.toHTML()}</div>
-        </body>
-      </html>
-    `;
-    };
-    const excludeControls = [
-        'letter-spacing',
-        'line-height',
-        'clear',
-        'headings',
-        'list-ol',
-        'list-ul',
-        'remove-styles',
-        'superscript',
-        'subscript',
-        'hr',
-        'text-align'
-    ];
-
-    const extendControls = [
-        {
-            key: 'custom-button',
-            type: 'button',
-            text: 'Preview',
-
+    // 及时销毁 editor ，重要！
+    useEffect(() => {
+        return () => {
+            if (editor == null) return
+            editor.destroy()
+            setEditor(null)
         }
-    ];
-
-
-
+    }, [editor])
 
     return (
-        <div className='editor-wrapper'>
-
-            <br/>
-            <Button onClick={saveEditorContent} type='primary' className='btn'>Ajouter</Button>
-        </div>
-    );
+        <>
+            <div style={{ border: '1px solid #ccc', zIndex: 100}}>
+                <Toolbar
+                    editor={editor}
+                    defaultConfig={toolbarConfig}
+                    mode="default"
+                    style={{ borderBottom: '1px solid #ccc' }}
+                />
+                <Editor
+                    defaultConfig={editorConfig}
+                    value={html}
+                    onCreated={setEditor}
+                    onChange={editor => setHtml(editor.getHtml())}
+                    mode="default"
+                    style={{ height: '500px', overflowY: 'hidden' }}
+                />
+            </div>
+            <div style={{ marginTop: '15px' }}>
+                {html}
+            </div>
+        </>
+    )
 }
 
-export default TextEditor;
-
-
-// <BraftEditor
-//     value={editorState}
-//     onChange={handleEditorChange}
-//     language="en"
-//     excludeControls={excludeControls}
-//     extendControls={extendControls}
-// />
-
+export default MyEditor
