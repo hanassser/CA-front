@@ -1,10 +1,11 @@
 import 'braft-editor/dist/index.css'
 import React, {useState} from 'react'
-import BraftEditor from 'braft-editor'
+import BraftEditor, { EditorState } from 'braft-editor'
 import {Button, Form, message,} from "antd";
 import './index.less';
-import {addService} from "@/api";
+import {addService} from "@/api/service";
 import {addPost, getPost} from "@/api/post-wall";
+
 
 function TextEditor({formData, imageData, isCard}:any) {
     const [editorState, setEditorState] = useState(BraftEditor.createEditorState(null));
@@ -13,15 +14,15 @@ function TextEditor({formData, imageData, isCard}:any) {
         setEditorState(newEditorState);
     };
 
-    const preview = () => {
-        if (window.previewWindow) {
-            window.previewWindow.close();
-        }
-
-        window.previewWindow = window.open();
-        window.previewWindow.document.write(buildPreviewHtml());
-        window.previewWindow.document.close();
-    };
+    // const preview = () => {
+    //     if (window.previewWindow) {
+    //         window.previewWindow.close();
+    //     }
+    //
+    //     window.previewWindow = window.open();
+    //     window.previewWindow.document.write(buildPreviewHtml());
+    //     window.previewWindow.document.close();
+    // };
 
 
     const [form] = Form.useForm();
@@ -38,12 +39,12 @@ function TextEditor({formData, imageData, isCard}:any) {
                 }
             });
         } else {
-            addService(dataToSend).then((res) => {
-                if (res.status === 0) {
-                    form.resetFields();
-                    message.success(res.msg);
-                }
-            });
+        addService(dataToSend).then((res) => {
+            if (res.status === 0) {
+                form.resetFields();
+                message.success(res.msg);
+            }
+        });
         };
     };
 
@@ -125,19 +126,16 @@ function TextEditor({formData, imageData, isCard}:any) {
             key: 'custom-button',
             type: 'button',
             text: 'Preview',
-            onClick: preview
+
         }
     ];
 
+
+
+
     return (
         <div className='editor-wrapper'>
-            <BraftEditor
-                value={editorState}
-                onChange={handleEditorChange}
-                language="en"
-                excludeControls={excludeControls}
-                extendControls={extendControls}
-            />
+
             <br/>
             <Button onClick={saveEditorContent} type='primary' className='btn'>Ajouter</Button>
         </div>
@@ -146,4 +144,12 @@ function TextEditor({formData, imageData, isCard}:any) {
 
 export default TextEditor;
 
+
+// <BraftEditor
+//     value={editorState}
+//     onChange={handleEditorChange}
+//     language="en"
+//     excludeControls={excludeControls}
+//     extendControls={extendControls}
+// />
 

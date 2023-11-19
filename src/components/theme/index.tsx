@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Drawer, Col, Row, message, Button, Radio, notification } from "antd";
 import MyIcon from "@/components/icon";
-import Color from "@/components/color";
 import { getKey, setKey, rmKey } from "@/utils";
 import "./index.less";
 
@@ -52,8 +51,8 @@ const darkTheme: ThemeJSON = process.env.showColorSet ? require("@/assets/theme/
 const defaultTheme: ThemeJSON = process.env.showColorSet ? require("@/assets/theme/default.json") : {};
 
 const Themes: ThemeList = [
-  { label: "default", value: "default", colorList: defaultTheme },
-  { label: "dark", value: "dark", colorList: darkTheme },
+  { label: "默认", value: "default", colorList: defaultTheme },
+  { label: "暗黑", value: "dark", colorList: darkTheme },
 ];
 
 
@@ -243,15 +242,7 @@ export default function SetTheme() {
             Supprimer la configuration du thème de couleur local
           </Button>
         </Row>
-        <Color
-          pageX={selectInfo.pageX}
-          pageY={selectInfo.pageY}
-          color={selectInfo.value}
-          colorKey={selectInfo.key}
-          onSureChange={onChangeComplete}
-          onClose={onCloseColor}
-          isShow={colorShow}
-        />
+
       </Drawer>
     </div>
   );
