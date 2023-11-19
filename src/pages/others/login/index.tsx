@@ -7,9 +7,7 @@ import { setUserInfoAction } from "@/store/user/action";
 import { login } from "@/api";
 import { UserInfo } from "@/types"
 import "./index.less";
-
-
-
+import {Link} from "react-router-dom";
 
 const initialValues = {
   remember: true,
@@ -94,9 +92,12 @@ export default function Login() {
               className="login-form-button"
               loading={btnLoad}
             >
-              Connexion
+              Login
             </Button>
-            <Button htmlType="reset">Réinitialiser</Button>
+
+
+            <Button   className="login-form-button">Create  </Button>
+
           </Form.Item>
         </Form>
       </div>

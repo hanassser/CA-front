@@ -2,6 +2,7 @@ import { Card, Row, Col, Typography,  } from "antd";
 import {EventList} from "@/types";
 import {Link} from "react-router-dom";
 import "./index.less";
+import {ClockCircleOutlined} from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -28,8 +29,11 @@ export default function PostWall({data} :CardShowProps) {
                   <Meta
                     title={item.name}
                     description={
-                      <Typography.Paragraph ellipsis={{ rows: 12 }} className="price">
-                          €: {item.price}
+                      <Typography.Paragraph ellipsis={{ rows: 12 }} >
+                          <p className="price"> €: {item.price}</p>
+                          <p className="color"><ClockCircleOutlined />  {item.time}</p>
+                          <p className="color">  {item.bookedPlace} / {item.totalPlace} booked, {item.totalPlace - item.bookedPlace} places left</p>
+
                       </Typography.Paragraph>
                     }
                   />

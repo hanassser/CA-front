@@ -15,6 +15,9 @@ type EventItem = {
   name: string
   price: string
   type: string
+  totalPlace: number
+  bookedPlace: number
+  time: string
   date: string
   description: string
   content: string
@@ -38,6 +41,9 @@ type WorkshopItem = {
   name: string
   price: string
   type: string
+  totalPlace: number
+  bookedPlace: number
+  time: string
   date: string
   description: string
   content: string
@@ -57,6 +63,9 @@ type CourseItem = {
   name: string
   price: string
   type: string
+  totalPlace: number
+  bookedPlace: number
+  time: string
   date: string
   description: string
   content: string
@@ -76,6 +85,9 @@ type ReservationItem = {
   name: string
   price: string
   type: string
+  totalPlace: number
+  bookedPlace: number
+  time: string
   date: string
   description: string
   content: string
@@ -115,6 +127,9 @@ type SubscriptionItem = {
   name: string
   price: string
   type: string
+  totalPlace: number
+  bookedPlace: number
+  time: string
   date: string
   description: string
   content: string

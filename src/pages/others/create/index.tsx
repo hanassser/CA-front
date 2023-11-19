@@ -185,28 +185,13 @@ function RegistrationForm() {
         </Form.Item>
 
         <Form.Item
-          name="nickname"
-          label="Pseudo"
-          tooltip="Comment voulez-vous que les autres vous appellent?"
+          name="name"
+          label="Name"
           rules={[
             {
               required: true,
               message: "Veuillez entrer votre pseudo",
               whitespace: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="residence"
-          label="Address"
-          rules={[
-            {
-              type: "array",
-              required: true,
-              message: "Veuillez sélectionner votre résidence habituelle",
             },
           ]}
         >
@@ -231,24 +216,6 @@ function RegistrationForm() {
           />
         </Form.Item>
 
-        <Form.Item
-          name="website"
-          label="Website"
-          rules={[
-            {
-              required: true,
-              message: "Veuillez entrer le site Web",
-            },
-          ]}
-        >
-          <AutoComplete
-            options={websiteOptions}
-            onChange={onWebsiteChange}
-            placeholder="website"
-          >
-            <Input />
-          </AutoComplete>
-        </Form.Item>
 
         <Form.Item
           name="agreement"
@@ -283,5 +250,5 @@ function RegistrationForm() {
 export default RegistrationForm;
 
 RegistrationForm.route = {
-  [MENU_PATH]: "/form/index",
+  [MENU_PATH]: "/create",
 };

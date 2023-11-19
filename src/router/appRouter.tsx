@@ -33,7 +33,7 @@ export default function AppRouter() {
         <div className="loading-page"></div>
       </Spin>
     );
-  if (!userInfo) return <Login />;
+  if (!userInfo) return <Login />
   if (isHash) {
     return <HashRouter basename={RouterBasename}>
       <Layout />

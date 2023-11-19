@@ -153,7 +153,7 @@ export default function MenuModal({
   const [form, setForm] = useState<FormInstance | null>(null);
   const [activeFn] = useState<ActiveFn>({ add, edit, addChild: add });
   const [formItems, setItems] = useState<FormItemData[]>([]);
-  // form item
+  // create item
   useEffect(() => {
     if (modalType !== "add" && menus && info) {
       let items = [...initFormItems.map((i) => ({ ...i }))];
@@ -193,7 +193,7 @@ export default function MenuModal({
       });
     }
   }, [modalType, isShow, info, form]);
-  // submit form
+  // submit create
   const submit = () => {
     form && form.validateFields().then((values) => {
       let fn = activeFn[modalType];

@@ -19,7 +19,7 @@ const RightMenu = ({ logout }: { logout: () => void }) => (
       onClick={logout}
       icon={<MyIcon type="icon_disconnectdevice" />}
     >
-        se déconnecter
+        log out
     </Menu.Item>
   </Menu>
 );
@@ -47,7 +47,7 @@ export default function LayoutHeader({ children }: LayoutHeaderProps) {
           getPopupContainer={getPopupContainer}
           overlay={<RightMenu logout={logout} />}
         >
-          <div>administrateur：{userInfo && userInfo.username}</div>
+          <div>{userInfo && userInfo.username}</div>
         </Dropdown>
       </div>
     </Header>
