@@ -7,7 +7,7 @@ import MyPagination, { PageInfo } from "@/components/pagination";
 import { getWorkshop} from "@/api/service";
 
 import "./index.less";
-import {EventList} from "@/types"
+import { WorkshopList} from "@/types"
 
 import CardShow from "@/components/card/card";
 
@@ -15,7 +15,7 @@ import CardShow from "@/components/card/card";
 export default function SearchPage() {
   const [searchForm] = Form.useForm();
   const [pageData, setPageData] = useState<PageInfo>({ page: 1 });
-  const [cardData, setData] = useState<EventList>([]);
+  const [cardData, setData] = useState<WorkshopList>([]);
   const [load, setLoad] = useState(true);
   const [total, setTotal] = useState(0);
 

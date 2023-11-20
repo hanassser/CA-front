@@ -30,9 +30,14 @@ export default function PostWall({data} :CardShowProps) {
                     description={
                       <Typography.Paragraph ellipsis={{ rows: 12 }} >
                           <p className="price"> €: {item.price}</p>
-                          <p className="color"><ClockCircleOutlined />  {item.date}</p>
-                          <p className="color">  {item.bookedPlace} / {item.totalPlace} booked, {item.totalPlace - item.bookedPlace} places left</p>
-
+                          {item.type !== "subscription" && (
+                              <p className="color"><ClockCircleOutlined />  {item.date}</p>
+                          )}
+                          {item.type !== "subscription" && (
+                              <p className="color">
+                                  {item.bookedPlace} / {item.totalPlace} booked, {item.totalPlace - item.bookedPlace} places left
+                              </p>
+                          )}
                       </Typography.Paragraph>
                     }
                   />

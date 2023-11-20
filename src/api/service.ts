@@ -16,8 +16,12 @@ const getCourseById = (id: any) => request.get(`/getCourseById/${id}`) as Promis
 const getReservation = (data: any) => request.get("/getReservation", data) as Promise<ReservationApi>;
 const getReservationById = (id: any) => request.get(`/getReservationById/${id}`) as Promise<ResponseData>;
 
+const joinService = (data: any) => request.post("/joinService", data) as Promise<ResponseData>;
+
+
 export {
     addService,
+    joinService,
     getEvent,
     getEventById,
     getWorkshop,
