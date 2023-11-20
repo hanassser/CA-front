@@ -24,14 +24,13 @@ export default function PostWall({data} :CardShowProps) {
                 <Card
                   hoverable
                   style={ cardStyle }
-                  cover={<img alt="example" src="/src/assets/images/plat.png" />}
                 >
                   <Meta
                     title={item.name}
                     description={
                       <Typography.Paragraph ellipsis={{ rows: 12 }} >
                           <p className="price"> €: {item.price}</p>
-                          <p className="color"><ClockCircleOutlined />  {item.time}</p>
+                          <p className="color"><ClockCircleOutlined />  {item.date}</p>
                           <p className="color">  {item.bookedPlace} / {item.totalPlace} booked, {item.totalPlace - item.bookedPlace} places left</p>
 
                       </Typography.Paragraph>
@@ -48,3 +47,5 @@ export default function PostWall({data} :CardShowProps) {
   );
 }
 PostWall.route = { [MENU_PATH]: "/post" }
+
+// cover={<img alt="example" src="/src/assets/images/plat.png" />}

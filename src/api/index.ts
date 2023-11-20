@@ -17,7 +17,7 @@ const request = ajax;
 
 
 const login = (data: any) => request.post("/login", data) as Promise<LoginApi>;
-
+const register = (d: any) => request.post("/register", d) as Promise<LoginApi>;
 
 const getPower = () => request.get("/getpower") as Promise<PowerApi>;
 
@@ -43,6 +43,7 @@ export {
   getMenu,
   login,
   addMenu,
+  register,
 
   getPower,
   delMenu,

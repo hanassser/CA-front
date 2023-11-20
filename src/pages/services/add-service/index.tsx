@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import {Form, Select, Input, DatePicker, InputNumber,} from "antd";
 import {DatePickerProps, RangePickerProps} from "antd/es/date-picker";
 import UploadImg from "@/components/upload";
+import MyEditor from "@/components/text-editor";
 
 
 export default function SearchPage() {
@@ -98,6 +99,9 @@ export default function SearchPage() {
                     <DatePicker  onChange={onChange} onOk={onOk} showTime={{ format: 'HH:mm' }}
                                 format="YYYY-MM-DD HH:mm"/>
                 </Form.Item>
+                <Form.Item label="Total place" name="place" rules={rules}>
+                    <InputNumber />
+                </Form.Item>
                 <Form.Item
                     label="Description"
                     name="description"
@@ -110,6 +114,7 @@ export default function SearchPage() {
                 </Form.Item>
                 <br/>
                 <Form.Item label="Content" >
+                    <MyEditor></MyEditor>
                      </Form.Item>
 
             </Form>
@@ -120,5 +125,5 @@ export default function SearchPage() {
     );
 }
 SearchPage.route = {
-    [MENU_PATH]: "/list/add-service",
+    [MENU_PATH]: "/manage/add-service",
 };

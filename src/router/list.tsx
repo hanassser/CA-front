@@ -17,7 +17,7 @@ const defaultArr: RouterInfo[] = [
   {
     [MENU_PATH]: "/",
     [MENU_KEY]: "index",
-    to: "/details/person",
+    to: "/list/subscription",
     components: Redirect,
   },
   {

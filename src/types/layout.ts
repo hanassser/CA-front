@@ -1,5 +1,5 @@
 
-export type LayoutMode = "TWO_COLUMN" | "SINGLECOLUMN" | "TWO_FLANKS"
+export type LayoutMode = "TWO_COLUMN" | "SINGLECOLUMN" | "TWO_FLANKS" | "FULL"
 
 export interface LayoutAction {
   type: LayoutMode,

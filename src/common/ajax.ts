@@ -5,6 +5,10 @@ import qs from "qs"
 // request address
 const BASE_URL = process.env.REACT_APP_API_BASEURL || "/api/react-ant-admin";
 
+// login path
+const loginPath = process.env.REACT_APP_ROUTERBASE + "/login"
+// register path
+const registerPath = process.env.REACT_APP_ROUTERBASE + "/create"
 
 // error message
 const codeMessage: { [key: number]: string } = {
@@ -28,7 +32,7 @@ const codeMessage: { [key: number]: string } = {
 // request config files
 const config = {
   // `baseURL` will be automatically added before `url`, unless `url` is an absolute URL.
-// It can be convenient to set a `baseURL` to pass relative URLs for methods of the axios instance.
+  // It can be convenient to set a `baseURL` to pass relative URLs for methods of the axios instance.
   baseURL: BASE_URL,
 
   timeout: 1000 * 15,
@@ -36,7 +40,7 @@ const config = {
   // `withCredentials` Indicates whether credentials are required for cross-origin requests
   withCredentials: false,
 
-// `maxRedirects` defines the maximum number of redirects to follow in node.js
+  // `maxRedirects` defines the maximum number of redirects to follow in node.js
   // If set to 0, no redirects will be followed
   maxRedirects: 3,
   headers: {
@@ -63,10 +67,14 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   function (response: AxiosResponse) {
-    if (response.data) {
+    if (response.status === 401 || response.status === 403) {
+      return Promise.reject("please login")
+    }
+    if (response.data && response.status !== 401) {
       let { msg, status } = response.data;
       if (status === 1) {
         message.error(msg);
+        return Promise.reject(response.data)
       }
     }
     return response && response.data;
@@ -82,9 +90,10 @@ instance.interceptors.response.use(
       });
       if (response.status === 401 || response.status === 403) {
         clearLocalDatas([USER_INFO, TOKEN, MENU]);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        let p = window.location.pathname
+        if (!(loginPath === p || p === registerPath)) {
+          return window.location.pathname = loginPath
+        }
       }
     } else if (!response) {
       notification.error({

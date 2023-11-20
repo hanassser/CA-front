@@ -4,7 +4,14 @@ import React, { useState, useEffect } from 'react'
 import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { i18nChangeLanguage } from '@wangeditor/editor'
+import { SlateElement } from '@wangeditor/editor'
 
+type ImageElement = SlateElement & {
+    src: string
+    alt: string
+    url: string
+    href: string
+}
 i18nChangeLanguage('en')
 
 function MyEditor() {

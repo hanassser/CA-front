@@ -43,7 +43,7 @@ export default function LayoutHeader({ children }: LayoutHeaderProps) {
       {children}
       <div className="right">
         <Dropdown
-          placement="bottomCenter"
+          placement="bottom"
           getPopupContainer={getPopupContainer}
           overlay={<RightMenu logout={logout} />}
         >

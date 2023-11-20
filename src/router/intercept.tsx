@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Spin } from "antd"
-import { getMenuParentKey } from "@/utils";
-import { useLocation } from "react-router-dom";
+import { getLocalUser, getMenuParentKey } from "@/utils";
+import { Redirect, useLocation } from "react-router-dom";
 import { MenuItem } from "@/types";
-import { useDispatchMenu } from "@/store/hooks";
+import { useDispatchLayout, useDispatchMenu, useDispatchUser, useStateUserInfo } from "@/store/hooks";
 
 const scrollPage = () => {
   window.scrollTo({
@@ -32,7 +32,21 @@ interface Props {
 function Intercept({ menuList, components: Components, [MENU_TITLE]: title, [MENU_PATH]: pagePath, pageKey, ...itemProps }: Props) {
   const [pageInit, setPageInit] = useState(false)
   const location = useLocation()
+  const { stateChangeLayout } = useDispatchLayout()
   const { stateSetOpenMenuKey, stateSetSelectMenuKey, stateAddOpenedMenu, stateSetCurrentPath } = useDispatchMenu()
+  const { stateSetUser } = useDispatchUser()
+  const userInfo = useStateUserInfo()
+
+
+  useEffect(() => {
+    if (!userInfo) {
+      let localInfo = getLocalUser();
+      if (localInfo && localInfo.isLogin === true) {
+        stateSetUser(localInfo);
+      }
+      return
+    }
+  }, [stateSetUser, userInfo]);
 
   const currentPath = useMemo(() => {
     const { pathname, search } = location
@@ -74,9 +88,15 @@ function Intercept({ menuList, components: Components, [MENU_TITLE]: title, [MEN
     }
   }, [onPathChange, pageInit])
 
-
+  useEffect(() => {
+    if (pagePath === "/create" || pagePath === "/login") {
+      stateChangeLayout("FULL")
+    } else {
+      stateChangeLayout("TWO_COLUMN")
+    }
+  }, [stateChangeLayout, pagePath])
   const hasPath = !menuList.find(
-    (m) => (m[MENU_PARENTPATH] || "") + m[MENU_PATH] === pagePath
+      (m) => (m[MENU_PARENTPATH] || "") + m[MENU_PATH] === pagePath
   );
   console.log(hasPath, pagePath)
 
@@ -89,12 +109,14 @@ function Intercept({ menuList, components: Components, [MENU_TITLE]: title, [MEN
   //     />
   //   );
   // }
-
+  if (!userInfo && !(pagePath === "/login" || pagePath === "/create")) {
+    return <Redirect to="/login" />
+  }
   return (
-    <Components
-      {...itemProps}
-      fallback={fallback}
-    />
+      <Components
+          {...itemProps}
+          fallback={fallback}
+      />
   );
 }
 export default Intercept

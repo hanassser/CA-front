@@ -30,7 +30,7 @@ export default function Router() {
           }
           return router;
         });
-        if (list && list.length) {
+        if (routers && routers.length) {
           stateSetMenuList(formatList);
           setAjaxUserMenuList(userMenus);
           setMergeList(routers);
@@ -47,19 +47,19 @@ export default function Router() {
         let { [MENU_KEY]: key, [MENU_PATH]: path } = item;
         const RenderRoute = item[MENU_KEEPALIVE] === "true" ? CacheRoute : Route;
         return (
-          <RenderRoute
-            key={key}
-            exact={true}
-            path={path}
-            render={(allProps) => (
-              <Intercept
-                {...allProps}
-                {...item}
-                menuList={ajaxUserMenuList}
-                pageKey={key}
-              />
-            )}
-          />
+            <RenderRoute
+                key={key}
+                exact={true}
+                path={path}
+                render={(allProps) => (
+                    <Intercept
+                        {...allProps}
+                        {...item}
+                        menuList={ajaxUserMenuList}
+                        pageKey={key}
+                    />
+                )}
+            />
         );
       });
     }
