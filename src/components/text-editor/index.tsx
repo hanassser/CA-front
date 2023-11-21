@@ -5,6 +5,8 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { i18nChangeLanguage } from '@wangeditor/editor'
 import { SlateElement } from '@wangeditor/editor'
+import {Button, Form, message} from "antd";
+import {addService} from "@/api/service";
 
 type ImageElement = SlateElement & {
     src: string
@@ -14,18 +16,18 @@ type ImageElement = SlateElement & {
 }
 i18nChangeLanguage('en')
 
-function MyEditor() {
+function MyEditor({formData,onResetForm}:any) {
     // editor 实例
     const [editor, setEditor] = useState<IDomEditor | null>(null)   // TS 语法
     // const [editor, setEditor] = useState(null)                   // JS 语法
 
     // 编辑器内容
-    const [html, setHtml] = useState('<p>hello</p>')
+    const [content, setHtml] = useState('')
 
     // 模拟 ajax 请求，异步设置 html
     useEffect(() => {
         setTimeout(() => {
-            setHtml('<p>hello world</p>')
+            setHtml("")
         }, 1500)
     }, [])
 
@@ -36,7 +38,8 @@ function MyEditor() {
     // 编辑器配置
     const editorConfig: Partial<IEditorConfig> = {    // TS 语法
         // const editorConfig = {                         // JS 语法
-        placeholder: '请输入内容...',
+        placeholder: '...',
+
     }
 
     // 及时销毁 editor ，重要！
@@ -48,6 +51,19 @@ function MyEditor() {
         }
     }, [editor])
 
+
+
+    const handleAdd = () =>{
+        console.log("formData",formData)
+        const dataToSend = { ...formData, content };
+        addService(dataToSend).then((res) => {
+            if (res.status === 0) {
+                onResetForm();
+                message.success(res.msg);
+            }
+        });
+        console.log('dataToSend', dataToSend);
+    }
     return (
         <>
             <div style={{ border: '1px solid #ccc', zIndex: 100}}>
@@ -59,7 +75,7 @@ function MyEditor() {
                 />
                 <Editor
                     defaultConfig={editorConfig}
-                    value={html}
+                    value={content}
                     onCreated={setEditor}
                     onChange={editor => setHtml(editor.getHtml())}
                     mode="default"
@@ -67,7 +83,7 @@ function MyEditor() {
                 />
             </div>
             <div style={{ marginTop: '15px' }}>
-                {html}
+                <Button type="primary" onClick={handleAdd}> Add</Button>
             </div>
         </>
     )

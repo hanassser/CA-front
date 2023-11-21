@@ -112,7 +112,7 @@ export default function ServiceDetailPage({match:{params:{type,id}}}: RouteCompo
     const handleJoin = () =>{
         const user = store.getState().user?.user_id;
         console.log(user,'user')
-        joinService(null).then();
+        joinService([9,10]).then();
 
     }
     return (

@@ -25,27 +25,23 @@ export default function SearchPage() {
     };
 
     const rules = [{ required: true, message: 'Must' }];
+
     const [formData, setFormData] = useState({});
     const handleFormValuesChange = (changedValues: Record<string, any>, allValues: Record<string, any>) => {
         setFormData(allValues);
         console.log(formData,'aaa')
     };
     const { TextArea } = Input;
+    const handleResetForm = () => {
+        console.log("kkkk")
+        setTimeout(() => {
+            window.location.reload(); // Reload the page after 1 second
+        }, 1000);
+    };
 
 
-    const [imageData, setImageData] = useState(null);
-    // const handleImageUpload = (file) => {
-    //     // Process the file data as needed (e.g., converting it to base64)
-    //     // For example, using FileReader to convert to base64:
-    //     setImageData(file);
-    //     const reader = new FileReader();
-    //     reader.onload = (e) => {
-    //         const base64Data = e.target.result;
-    //         setImageData(base64Data);
-    //     };
-    //     reader.readAsDataURL(file);
-    //     console.log('file', file)
-    // };
+
+
 
     return (
         <div className="container">
@@ -99,7 +95,7 @@ export default function SearchPage() {
                     <DatePicker  onChange={onChange} onOk={onOk} showTime={{ format: 'HH:mm' }}
                                 format="YYYY-MM-DD HH:mm"/>
                 </Form.Item>
-                <Form.Item label="Total place" name="place" rules={rules}>
+                <Form.Item label="Total place" name="totalPlace" rules={rules}>
                     <InputNumber />
                 </Form.Item>
                 <Form.Item
@@ -114,7 +110,7 @@ export default function SearchPage() {
                 </Form.Item>
                 <br/>
                 <Form.Item label="Content" >
-                    <MyEditor></MyEditor>
+                    <MyEditor formData={formData} onResetForm={handleResetForm}></MyEditor>
                      </Form.Item>
 
             </Form>
