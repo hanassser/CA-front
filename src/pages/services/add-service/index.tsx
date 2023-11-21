@@ -64,7 +64,7 @@ export default function SearchPage() {
                 </Form.Item>
                 <Form.Item label="Type" name="type" rules={rules}>
                     <Select
-                        placeholder="Choisir le type"
+                        placeholder="Select type"
                         onChange={handleSelect}
                         style={{ width: 200 }}
                         options={[

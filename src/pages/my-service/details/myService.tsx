@@ -22,9 +22,10 @@ export default function MyService() {
             const { data, status } = res;
 
             if (status === 0 && data) {
+                let order_id= (data as any).event.map((item:any)=>item.order_id)
                 // Use map to create an array of promises
                 const promises =(data as any).event.map((item: { m_id: any; type: any }) =>
-                    getServiceByIdAndType(item.m_id, item.type)
+                    getServiceByIdAndType(item.m_id, item.type,order_id)
                 );
 
                 // Use Promise.all to wait for all promises to resolve

@@ -19,11 +19,12 @@ const getReservationById = (id: any) => request.get(`/getReservationById/${id}`)
 const joinService = (data: any) => request.post("/joinService", data) as Promise<ResponseData>;
 
 const getServiceByUserId = (data: any) => request.get("/getServiceByUserId", data) as Promise<ServiceApi>;
-const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByIdAndType/${id}/${type}`) as Promise<ServiceApi>;
+const getServiceByIdAndType = (id: any, type: any, order_id: any) => request.get(`/getServiceByIdAndType/${id}/${type}`, { order_id: JSON.stringify(order_id) } as any) as Promise<ServiceApi>;
 const isJoined = () => request.get("/isJoined",) as Promise<ResponseData>;
 const getAllUserService = (data: any) => request.get("/getAllUserService", data) as Promise<ResponseData>;
 const delUserService = (id: any) => request.delete(`/delUserService/${id}`) as Promise<ResponseData>;
 const addOrder = (data: any) => request.post("/addOrder", data) as Promise<ResponseData>;
+const delUser = (id: any) => request.delete(`/delUser/${id}`) as Promise<ResponseData>;
 
 export {
     addService,
@@ -32,6 +33,7 @@ export {
     getAllUserService,
     delUserService,
     addOrder,
+    delUser,
 
     getEvent,
     getEventById,
