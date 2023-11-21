@@ -5,7 +5,7 @@ import {
   getEventById,
   getReservationById,
   getSubscriptionById,
-  getWorkshopById,
+  getWorkshopById, isJoined,
   joinService
 } from "@/api/service";
 import { RouteComponentProps, useHistory } from 'react-router-dom';
@@ -20,7 +20,11 @@ export default function ServiceDetailPage({ match: { params: { type, id } } }: R
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const getIsJoined = () =>{
+    isJoined();
+  }
   useEffect(() => {
+    // getIsJoined()
     if (type == 'event') {
       getEventById(id).then((res) => {
         // @ts-ignore

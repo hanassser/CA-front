@@ -20,11 +20,13 @@ const joinService = (data: any) => request.post("/joinService", data) as Promise
 
 const getServiceByUserId = () => request.get("/getServiceByUserId") as Promise<ServiceApi>;
 const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByIdAndType/${id}/${type}`) as Promise<ServiceApi>;
+const isJoined = () => request.get("/isJoined",) as Promise<ResponseData>;
 
 
 export {
     addService,
     joinService,
+    isJoined,
     getEvent,
     getEventById,
     getWorkshop,
