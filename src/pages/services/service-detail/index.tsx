@@ -21,7 +21,7 @@ export default function ServiceDetailPage({ match: { params: { type, id } } }: R
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   useEffect(() => {
-    if (type == 'Event') {
+    if (type == 'event') {
       getEventById(id).then((res) => {
         // @ts-ignore
         const { data } = res;
@@ -64,7 +64,7 @@ export default function ServiceDetailPage({ match: { params: { type, id } } }: R
         console.log(data.event.content, 'res')
       });
     }
-    if (type == 'Reservation') {
+    if (type == 'reservation') {
       getReservationById(id).then((res: any) => {
         const { data } = res;
         setTitle(data.event.name);

@@ -7,7 +7,7 @@ import MyPagination, { PageInfo } from "@/components/pagination";
 import "./index.less";
 import {SubscriptionList} from "@/types"
 import CardShow from "@/components/card/card";
-import {getServiceByUserId, getSubscription} from "@/api/service";
+import {getServiceByIdAndType, getServiceByUserId, getSubscription} from "@/api/service";
 
 
 export default function MyService() {
@@ -16,19 +16,72 @@ export default function MyService() {
     const [cardData, setData] = useState<SubscriptionList>([]);
     const [load, setLoad] = useState(true);
     const [total, setTotal] = useState(0);
+    // const list = [];
+    //
+    // const getDataList = (data: PageInfo) => {
+    //     getServiceByUserId(data).then((res) => {
+    //         const { data, status } = res;
+    //
+    //         // data.event
+    //         if (status === 0 && data) {
+    //
+    //
+    //             data.event.forEach((item: { type: any; }) => list.push(getServiceByIdAndType(item.m_id,item.type)))
+    //
+    //
+    //             let {  total } = data;
+    //             setTotal(total);
+    //             setData(list);
+    //             console.log(list,'list');
+    //             setLoad(false);
+    //             return;
+    //         }
+    //
+    //     });
+    // };
+    const list = [];
 
     const getDataList = (data: PageInfo) => {
         getServiceByUserId(data).then((res) => {
             const { data, status } = res;
-            if (status === 0 && data) {
-                let { list, total } = data;
-                setTotal(total);
 
-                setLoad(false);
+            if (status === 0 && data) {
+                // Use map to create an array of promises
+                const promises = data.event.map((item: { m_id: any; type: any }) =>
+                    getServiceByIdAndType(item.m_id, item.type)
+                );
+
+                // Use Promise.all to wait for all promises to resolve
+                Promise.all(promises)
+                    .then((resultList) => {
+                        // Now resultList contains the resolved values of all promises
+                        resultList.forEach((result) => {
+                            // Do something with each result
+                            list.push(result);
+                        });
+
+                        let { total } = data;
+                        setTotal(total);
+                        console.log(list, 'list');
+                        let reslist = []
+                        list.forEach(res=>{
+                            reslist.push(...res.data.event)
+                        })
+                        console.log(reslist, 'reslist');
+
+                        setData(reslist);
+                        setLoad(false);
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching service data:', error);
+                        // Handle errors if necessary
+                    });
+
                 return;
             }
         });
     };
+
 
 
 

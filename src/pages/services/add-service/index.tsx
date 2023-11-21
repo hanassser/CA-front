@@ -69,23 +69,23 @@ export default function SearchPage() {
                         style={{ width: 200 }}
                         options={[
                             {
-                                value: 'Subscription',
+                                value: 'subscription',
                                 label: 'Subscription',
                             },
                             {
-                                value: 'Event',
+                                value: 'event',
                                 label: 'Event',
                             },
                             {
-                                value: 'Workshop',
+                                value: 'workshop',
                                 label: 'Workshop',
                             },
                             {
-                                value: 'Course',
+                                value: 'course',
                                 label: 'Course',
                             },
                             {
-                                value: 'Reservation',
+                                value: 'reservation',
                                 label: 'Reservation',
                             },
                         ]}

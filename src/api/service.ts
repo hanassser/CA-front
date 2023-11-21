@@ -18,7 +18,9 @@ const getReservationById = (id: any) => request.get(`/getReservationById/${id}`)
 
 const joinService = (data: any) => request.post("/joinService", data) as Promise<ResponseData>;
 
-const getServiceByUserId = (data: any) => request.get("/getServiceByUserId", data) as Promise<ServiceApi>;
+const getServiceByUserId = () => request.get("/getServiceByUserId") as Promise<ServiceApi>;
+const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByIdAndType/${id}/${type}`) as Promise<ServiceApi>;
+
 
 export {
     addService,
@@ -34,4 +36,5 @@ export {
     getCourseById,
     getReservationById,
     getServiceByUserId,
+    getServiceByIdAndType,
 };
