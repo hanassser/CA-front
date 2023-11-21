@@ -13,14 +13,14 @@ import AllUserServiceCard from "@/components/allUserServiceCard/card";
 
 
 export default function AllUserService() {
-    const [searchForm] = Form.useForm();
     const [pageData, setPageData] = useState<PageInfo>({ page: 1 });
     const [cardData, setData] = useState<EventList>([]);
     const [load, setLoad] = useState(true);
     const [total, setTotal] = useState(0);
 
-    const getDataList = (data: PageInfo) => {
-        getAllUserService(data).then((res) => {
+    const getDataList = (pageData: PageInfo) => {
+        getAllUserService(pageData).then((res:any) => {
+            setPageData(pageData);
             const { data, status } = res;
             if (status === 0 && data) {
                 let { list, total } = data;
@@ -32,19 +32,20 @@ export default function AllUserService() {
         });
     };
 
+    const refresh= ()=>{
+        getDataList(pageData)
+    }
 
 
     const pageChange = (pageData: PageInfo) => {
-        let data = searchForm.getFieldsValue();
-        getDataList({ ...pageData, ...data });
-        setPageData(pageData);
+        getDataList({ ...pageData });
     };
 
 
     return (
         <div className="search-container">
             <Spin spinning={load}>
-                <AllUserServiceCard data={cardData}/>
+                <AllUserServiceCard data={cardData} refresh={refresh}/>
                 <MyPagination
                     page={pageData.page}
                     immediately={getDataList}

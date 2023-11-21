@@ -18,10 +18,10 @@ const getReservationById = (id: any) => request.get(`/getReservationById/${id}`)
 
 const joinService = (data: any) => request.post("/joinService", data) as Promise<ResponseData>;
 
-const getServiceByUserId = () => request.get("/getServiceByUserId") as Promise<ServiceApi>;
+const getServiceByUserId = (data: any) => request.get("/getServiceByUserId", data) as Promise<ServiceApi>;
 const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByIdAndType/${id}/${type}`) as Promise<ServiceApi>;
 const isJoined = () => request.get("/isJoined",) as Promise<ResponseData>;
-const getAllUserService = () => request.get("/getAllUserService",) as Promise<ResponseData>;
+const getAllUserService = (data: any) => request.get("/getAllUserService", data) as Promise<ResponseData>;
 const delUserService = (id: any) => request.delete(`/delUserService/${id}`) as Promise<ResponseData>;
 const addOrder = (data: any) => request.post("/addOrder", data) as Promise<ResponseData>;
 

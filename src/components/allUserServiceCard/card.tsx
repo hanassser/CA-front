@@ -9,11 +9,12 @@ const { Meta } = Card;
 
 interface CardShowProps {
     data: EventList;
+    refresh?:()=>void
 }
 
 
 
-export default function AllUserServiceCard({data} :CardShowProps) {
+export default function AllUserServiceCard({data,refresh} :CardShowProps) {
 
     const cardStyle = {
         width: 340,
@@ -22,42 +23,43 @@ export default function AllUserServiceCard({data} :CardShowProps) {
         delUserService(id).then((res) => {
             if (res.status === 0) {
                 message.success(res.msg);
+                refresh && refresh()
             }
         });
 
 
     };
-  return (
-    <div className="card-container">
-      <Row gutter={[16, 16]}>
-        {data.map((item:any) => (
-          <Col span={8} key={item.name}>
+    return (
+        <div className="card-container">
+            <Row gutter={[16, 16]}>
+                {data.map((item:any) => (
+                    <Col span={8} key={item.order_id}>
 
-                <Card
-                  hoverable
-                  style={ cardStyle }
-                >
-                  <Meta
-                    title={item.name}
-                    description={
-                      <Typography.Paragraph ellipsis={{ rows: 12 }} >
-                          <p className="price"> Order ID: {item.order_id}</p>
-                          <p > User ID: {item.user_id}</p>
-                          <p > Type: {item.type}</p>
+                        <Card
+                            hoverable
+                            style={ cardStyle }
+                        >
+                            <Meta
+                                title={item.name}
+                                description={
+                                    <Typography.Paragraph ellipsis={{ rows: 12 }} >
+                                        <p className="price"> Order ID: {item.order_id}</p>
+                                        <p > User ID: {item.user_id}</p>
+                                        <p > Type: {item.type}</p>
 
-                      </Typography.Paragraph>
-                    }
-                  />
-                    <Button type="primary" onClick={()=>handleDelete(item.order_id)}>Delete</Button>
+                                    </Typography.Paragraph>
+                                }
+                            />
+                            <Button type="primary" onClick={()=>handleDelete(item.order_id)}>Delete</Button>
 
-                </Card>
+                        </Card>
 
-          </Col>
-        ))}
-      </Row>
+                    </Col>
+                ))}
+            </Row>
 
-    </div>
-  );
+        </div>
+    );
 }
 AllUserServiceCard.route = { [MENU_PATH]: "/allUserServiceCard" }
 

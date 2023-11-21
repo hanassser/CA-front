@@ -16,14 +16,14 @@ export default function MyService() {
     const [cardData, setData] = useState<SubscriptionList>([]);
     const [load, setLoad] = useState(true);
     const [total, setTotal] = useState(0);
-    const list = [];
+    const list = [] as any;
     const getDataList = (data: PageInfo) => {
         getServiceByUserId(data).then((res) => {
             const { data, status } = res;
 
             if (status === 0 && data) {
                 // Use map to create an array of promises
-                const promises = data.event.map((item: { m_id: any; type: any }) =>
+                const promises =(data as any).event.map((item: { m_id: any; type: any }) =>
                     getServiceByIdAndType(item.m_id, item.type)
                 );
 
@@ -39,8 +39,8 @@ export default function MyService() {
                         let { total } = data;
                         setTotal(total);
                         console.log(list, 'list');
-                        let reslist = []
-                        list.forEach(res=>{
+                        let reslist:any  = [];
+                        list.forEach((res: { data: { event: any; }; })=>{
                             reslist.push(...res.data.event)
                         })
                         console.log(reslist, 'reslist');
