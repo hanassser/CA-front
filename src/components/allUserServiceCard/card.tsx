@@ -1,9 +1,9 @@
-import {Card, Row, Col, Typography, Button,} from "antd";
+import {Card, Row, Col, Typography, Button, message,} from "antd";
 import {EventList} from "@/types";
 import {Link} from "react-router-dom";
 import "./index.less";
 import {ClockCircleOutlined} from "@ant-design/icons";
-import {delUserService} from "@/api/service";
+import {addService, delUserService} from "@/api/service";
 
 const { Meta } = Card;
 
@@ -19,7 +19,13 @@ export default function AllUserServiceCard({data} :CardShowProps) {
         width: 340,
     };
     const handleDelete = (id: any) => {
-        delUserService(id);
+        delUserService(id).then((res) => {
+            if (res.status === 0) {
+                message.success(res.msg);
+            }
+        });
+
+
     };
   return (
     <div className="card-container">
@@ -42,7 +48,7 @@ export default function AllUserServiceCard({data} :CardShowProps) {
                       </Typography.Paragraph>
                     }
                   />
-                    <Button type="primary" onClick={handleDelete}>Delete</Button>
+                    <Button type="primary" onClick={()=>handleDelete(item.order_id)}>Delete</Button>
 
                 </Card>
 
