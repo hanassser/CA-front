@@ -16,31 +16,7 @@ export default function MyService() {
     const [cardData, setData] = useState<SubscriptionList>([]);
     const [load, setLoad] = useState(true);
     const [total, setTotal] = useState(0);
-    // const list = [];
-    //
-    // const getDataList = (data: PageInfo) => {
-    //     getServiceByUserId(data).then((res) => {
-    //         const { data, status } = res;
-    //
-    //         // data.event
-    //         if (status === 0 && data) {
-    //
-    //
-    //             data.event.forEach((item: { type: any; }) => list.push(getServiceByIdAndType(item.m_id,item.type)))
-    //
-    //
-    //             let {  total } = data;
-    //             setTotal(total);
-    //             setData(list);
-    //             console.log(list,'list');
-    //             setLoad(false);
-    //             return;
-    //         }
-    //
-    //     });
-    // };
     const list = [];
-
     const getDataList = (data: PageInfo) => {
         getServiceByUserId(data).then((res) => {
             const { data, status } = res;
