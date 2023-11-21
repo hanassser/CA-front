@@ -22,13 +22,14 @@ const getServiceByUserId = () => request.get("/getServiceByUserId") as Promise<S
 const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByIdAndType/${id}/${type}`) as Promise<ServiceApi>;
 const isJoined = () => request.get("/isJoined",) as Promise<ResponseData>;
 const getAllUserService = () => request.get("/getAllUserService",) as Promise<ResponseData>;
-
+const delUserService = (id: any) => request.delete(`/delUserService/${id}`) as Promise<ResponseData>;
 
 export {
     addService,
     joinService,
     isJoined,
     getAllUserService,
+    delUserService,
 
     getEvent,
     getEventById,

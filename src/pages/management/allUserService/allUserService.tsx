@@ -9,7 +9,7 @@ import {getAllUserService, getEvent} from "@/api/service";
 import "./index.less";
 import {EventList} from "@/types"
 
-import CardShow from "@/components/card/card";
+import AllUserServiceCard from "@/components/allUserServiceCard/card";
 
 
 export default function AllUserService() {
@@ -44,7 +44,7 @@ export default function AllUserService() {
     return (
         <div className="search-container">
             <Spin spinning={load}>
-                <CardShow data={cardData}/>
+                <AllUserServiceCard data={cardData}/>
                 <MyPagination
                     page={pageData.page}
                     immediately={getDataList}
