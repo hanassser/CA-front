@@ -6,7 +6,7 @@ import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 import { i18nChangeLanguage } from '@wangeditor/editor'
 import { SlateElement } from '@wangeditor/editor'
 import {Button, Form, message} from "antd";
-import {addService} from "@/api/service";
+import {addOrder, addService} from "@/api/service";
 
 type ImageElement = SlateElement & {
     src: string
@@ -71,6 +71,12 @@ function MyEditor({formData,onResetForm}:any) {
         console.log("formData",formData)
         const dataToSend = { ...formData, content };
         addService(dataToSend).then((res) => {
+            if (res.status === 0) {
+                onResetForm();
+                message.success(res.msg);
+            }
+        });
+        addOrder(dataToSend).then((res) => {
             if (res.status === 0) {
                 onResetForm();
                 message.success(res.msg);

@@ -23,6 +23,7 @@ const getServiceByIdAndType = (id:any, type: any) => request.get(`/getServiceByI
 const isJoined = () => request.get("/isJoined",) as Promise<ResponseData>;
 const getAllUserService = () => request.get("/getAllUserService",) as Promise<ResponseData>;
 const delUserService = (id: any) => request.delete(`/delUserService/${id}`) as Promise<ResponseData>;
+const addOrder = (data: any) => request.post("/addOrder", data) as Promise<ResponseData>;
 
 export {
     addService,
@@ -30,6 +31,7 @@ export {
     isJoined,
     getAllUserService,
     delUserService,
+    addOrder,
 
     getEvent,
     getEventById,
