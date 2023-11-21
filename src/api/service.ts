@@ -1,6 +1,6 @@
 import ajax from "@/common/ajax";
 
-import {EventAPi, WorkshopAPi, SubscriptionApi, CourseApi, ResponseData, ReservationApi} from "../types";
+import {EventAPi, WorkshopAPi, SubscriptionApi, CourseApi, ResponseData, ReservationApi, ServiceApi} from "../types";
 
 const request = ajax;
 
@@ -18,6 +18,7 @@ const getReservationById = (id: any) => request.get(`/getReservationById/${id}`)
 
 const joinService = (data: any) => request.post("/joinService", data) as Promise<ResponseData>;
 
+const getServiceByUserId = (data: any) => request.get("/getServiceByUserId", data) as Promise<ServiceApi>;
 
 export {
     addService,
@@ -32,4 +33,5 @@ export {
     getWorkshopById,
     getCourseById,
     getReservationById,
+    getServiceByUserId,
 };

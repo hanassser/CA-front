@@ -7,6 +7,20 @@ export type PostWallList = PostWallItem[]
 export type CourseList = CourseItem[]
 export type ReservationList = ReservationItem[]
 export type  SubscriptionList = SubscriptionItem[]
+export type  ServiceList = ServiceItem[]
+
+
+type ServiceItem = {
+  m_id: number
+  user_id: number
+}
+export interface ServiceApi extends ResponseData {
+  data?: {
+    total: number
+    mapKey: MapKey
+    list: ServiceList
+  }
+}
 
 
 

@@ -39,8 +39,22 @@ function MyEditor({formData,onResetForm}:any) {
     const editorConfig: Partial<IEditorConfig> = {    // TS 语法
         // const editorConfig = {                         // JS 语法
         placeholder: '...',
-
     }
+    editorConfig.MENU_CONF = {
+        uploadImage: {
+            server: process.env.REACT_APP_API_BASEURL + '/post-upload-img',
+            fieldName: "postImg"
+        },
+        uploadVideo: {
+            server: process.env.REACT_APP_API_BASEURL + '/post-upload-img',
+            fieldName: "postImg",
+            maxFileSize: 1024 * 1024 * 1024,
+            onError(_file: any, err: any) {
+                message.error(err.message)
+            },
+        }
+    }
+
 
     // 及时销毁 editor ，重要！
     useEffect(() => {

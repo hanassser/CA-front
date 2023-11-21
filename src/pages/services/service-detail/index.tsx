@@ -22,6 +22,7 @@ export default function ServiceDetailPage({match:{params:{type,id}}}: RouteCompo
     const [price, setPrice] = useState("");
     if(type == 'Event'){
         getEventById(id).then((res)=>{
+            // @ts-ignore
             const {data} = res;
             setTitle(data.event.name);
             setDescription(data.event.description);

@@ -34,9 +34,9 @@ export default function SearchPage() {
     const { TextArea } = Input;
     const handleResetForm = () => {
         console.log("kkkk")
-        setTimeout(() => {
-            window.location.reload(); // Reload the page after 1 second
-        }, 1000);
+        // setTimeout(() => {
+        //     window.location.reload(); // Reload the page after 1 second
+        // }, 1000);
     };
 
 
