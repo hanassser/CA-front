@@ -23,7 +23,7 @@ export default function MyService() {
             if (status === 0 && data) {
                 let { list, total } = data;
                 setTotal(total);
-                setData(list);
+
                 setLoad(false);
                 return;
             }

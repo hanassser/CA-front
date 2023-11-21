@@ -105,9 +105,8 @@ export default function SearchPage() {
                 >
                     <TextArea showCount maxLength={50}  />
                 </Form.Item>
-                <Form.Item label="Cover Image" rules={[{ required: true}]}>
 
-                </Form.Item>
+
                 <br/>
                 <Form.Item label="Content" >
                     <MyEditor formData={formData} onResetForm={handleResetForm}></MyEditor>
