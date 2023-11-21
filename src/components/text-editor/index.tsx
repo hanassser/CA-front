@@ -76,12 +76,7 @@ function MyEditor({formData,onResetForm}:any) {
                 message.success(res.msg);
             }
         });
-        addOrder(dataToSend).then((res) => {
-            if (res.status === 0) {
-                onResetForm();
-                message.success(res.msg);
-            }
-        });
+
         console.log('dataToSend', dataToSend);
     }
     return (
